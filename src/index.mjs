@@ -26,6 +26,7 @@ console.log(intix.name);
 const channel = await (intix.channels.cache.find(channel => channel.id === process.env.DISCORD_CHANNEL.trim())).fetch();
 console.log(channel.name);
 const message = await channel.messages.fetch(process.env.MESSAGE_ID);
+
 //array bijhouden en array omzetten naar string met stringify
 
 
@@ -39,5 +40,9 @@ bot.on('message', msg => {
 
     if (msg.content.startsWith('!showIdeas:')) {
         msg.reply(ideas);
+    }
+
+    if (msg.content.startsWith('!createList')) {
+        channel.send("ideas :\n").then((msg) => msg.pin());
     }
 });
